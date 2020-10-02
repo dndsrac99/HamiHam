@@ -41,10 +41,15 @@ export default {
         this.$eventBus.$on('sayYes',function(){
       console.log(`did u say yes? ${this.$money.saidyes}`)
       this.$money.saidyes = true
+    }),
+    this.$eventBus.$on('increaseEssays',function(amount){
+      console.log(`yes ${this.$money.essays} essays`)
+      this.$money.essays += amount
     })
   },
   beforeDestroy(){
     this.$eventBus.$off('increaseMoney'),
+    this.$eventBus.$off('increaseEssays'),
     this.$eventBus.$off('decreaseMoney'),
     this.$eventBus.$off('sayYes')
   },
