@@ -7,11 +7,15 @@
       dark
     >
     <v-toolbar-title class="blacktext"><v-icon size="30" color="black">mdi-star-circle</v-icon> HamiHam</v-toolbar-title>
+    <v-tabs color="black">
+      <v-tab >Hamilton</v-tab>
+      <v-tab>Washington</v-tab>
+    </v-tabs>
     </v-app-bar>
 
     <v-main>
       <mainpage @constClicked = "constitution = true" :saynotothis = "true"/>
-      <usa v-if="constitution" @tryno = "saidyes = true"/>
+      <usa  v-if="constitution" @tryno = "saidyes = true"/>
     </v-main>
   </v-app>
 </template>
@@ -68,5 +72,12 @@ export default {
 .blacktext{
   color:black;
   font-size: 25px;
+}
+.bttn{
+ padding-left: 35;
+ padding-right: 35;
+}
+.black{
+  
 }
 </style>
