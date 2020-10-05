@@ -38,9 +38,9 @@
       </v-row>
 
       <v-row>
-        <v-btn v-if="this.$money.essays >= 51 && constwritten == false" class="essayText" rounded elevation="2" color="yellow darken-2" @click="writingConstitution">write the us constitution</v-btn>
+        <v-btn v-if="this.$money.essays >= 51 && constwritten == false" class="essayText" rounded elevation="2" color="yellow darken-2" @click="writingConstitution">write the us constitution <v-label class="pricetext"> 51</v-label><v-icon>mdi-feather</v-icon> </v-btn>
           <v-spacer></v-spacer>
-        <v-btn v-if="cheated >= pamphletPrice" class="cheatText" rounded elevation="2" color="yellow darken-2" @click="reynoldspamphlet">the reynolds pamphlet <v-label class="priceText">{{pamphletPrice}}</v-label></v-btn>
+        <v-btn v-if="cheated >= pamphletPrice" class="cheatText" rounded elevation="2" color="yellow darken-2" @click="reynoldspamphlet">the reynolds pamphlet <v-label class="priceText">{{pamphletPrice}}</v-label><v-icon>mdi-human-female</v-icon></v-btn>
 
       </v-row>
     </v-card>
@@ -107,7 +107,7 @@ export default {
       reynoldspamphlet(){
         if(this.autowriting != null){
           clearInterval(this.autowriting),
-           this.pamphletSpeed = this.pamphletSpeed * 0.9
+           this.pamphletSpeed = this.pamphletSpeed * 0.75
          }
         this.pamphletPrice = this.pamphletPrice.toFixed(0)
          this.cheated = this.cheated - this.pamphletPrice,

@@ -45,12 +45,17 @@ export default {
     this.$eventBus.$on('increaseEssays',function(amount){
       console.log(`yes ${this.$money.essays} essays`)
       this.$money.essays += amount
+    }),
+        this.$eventBus.$on('decreaseEssays',function(amount){
+      console.log(`yes should go down ${this.$money.essays} essays`)
+      this.$money.essays -= amount
     })
   },
   beforeDestroy(){
     this.$eventBus.$off('increaseMoney'),
     this.$eventBus.$off('increaseEssays'),
     this.$eventBus.$off('decreaseMoney'),
+    this.$eventBus.$off('decreaseEssays'),
     this.$eventBus.$off('sayYes')
   },
   data: () => ({
