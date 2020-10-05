@@ -26,7 +26,7 @@
 
           color="white"
           @click="advert"
-        >Advertise the Federalist party <v-icon>mdi-feather</v-icon>{{adcosts.essaycost}} <v-icon>mdi-cash-multiple</v-icon> {{adcosts.moneycost}}</v-btn>
+        >Advertise the Federalist party {{adcosts.essaycost}}<v-icon>mdi-feather</v-icon>  {{adcosts.moneycost}} <v-icon>mdi-cash-multiple</v-icon></v-btn>
       </v-row>
 
       <v-row>
@@ -36,7 +36,7 @@
           class="moneyText"
           color="white"
           @click="sockedaway"
-        >sock away $30</v-btn>
+        >sock away  30 <v-icon>mdi-cash-multiple</v-icon></v-btn>
       </v-row>
     </v-card>
   </v-container>
