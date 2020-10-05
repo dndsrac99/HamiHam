@@ -13,7 +13,22 @@
         <v-icon color="white" class="whiteIcon" size="40">mdi-cash-multiple</v-icon>
         Dollars: ${{$money.moneybag}}
       </v-card-title>
-      <v-btn rounded class="moneyText" color="white" @click="getmoney">Work</v-btn>
+      <v-row>
+        <v-card-text class="moneySubText">You get ${{moneyPerSecond}} per second</v-card-text>
+      </v-row>
+      <v-row>
+        <v-btn rounded class="moneyText" color="white" @click="getmoney(1)">Work</v-btn>
+        <v-spacer></v-spacer>
+        <v-btn
+          rounded
+          class="cheatText"
+          v-if="$money.moneybag >= adcosts.moneycost && $money.essays >= adcosts.essaycost "
+
+          color="white"
+          @click="advert"
+        >Advertise the Federalist party {{adcosts.essaycost}}<v-icon>mdi-feather</v-icon>  {{adcosts.moneycost}} <v-icon>mdi-cash-multiple</v-icon></v-btn>
+      </v-row>
+
       <v-row>
         <v-btn
           v-if="this.$money.moneybag >= 30 && this.$money.saidyes == false"
@@ -21,7 +36,7 @@
           class="moneyText"
           color="white"
           @click="sockedaway"
-        >sock away $30</v-btn>
+        >sock away  30 <v-icon>mdi-cash-multiple</v-icon></v-btn>
       </v-row>
     </v-card>
   </v-container>
@@ -45,10 +60,11 @@
   margin-bottom: 2%;
   margin-top: 10px;
 }
-.essaysubText {
+.moneySubText {
   margin-left: 30px;
   margin-bottom: 1%;
-  margin-top: -40px;
+  margin-top: -20px;
+  color: white;
 }
 .priceText {
   margin-left: -4%;
@@ -65,30 +81,67 @@
 export default {
   name: "Usa",
   methods: {
-    getmoney() {
-      this.$eventBus.$emit("increaseMoney", 1);
+    getmoney(amount) {
+      this.$eventBus.$emit("increaseMoney", amount);
     },
     sockedaway() {
       this.$eventBus.$emit("decreaseMoney", 30);
       this.$eventBus.$emit("sayYes");
+    },
+    advert() {
+      if (this.autoCollect != null) {
+        clearInterval(this.autoCollect),
+          (this.adcosts.gainspeed = this.adcosts.gainspeed * 0.6);
+      }
+      const vm = this;
+
+      this.$eventBus.$emit("decreaseMoney", vm.adcosts.moneycost);
+      this.$eventBus.$emit("decreaseEssays", vm.adcosts.essaycost);
+
+      this.autoCollect = setInterval(function() {
+        vm.getmoney(vm.adcosts.gainamount);
+      }, this.adcosts.gainspeed);
+      console.log("alexander hamilton");
+      this.moneyPerSecond =
+        this.adcosts.gainamount / (this.adcosts.gainspeed / 1000);
+      this.round();
+    },
+    round() {
+      this.adcosts.moneycost = Number(this.adcosts.moneycost).toFixed(0);
+      this.adcosts.essaycost = Number(this.adcosts.essaycost).toFixed(0);
+      this.moneyPerSecond = Number(this.moneyPerSecond).toFixed(2);
+      this.adcosts.moneycost = Number(this.adcosts.moneycost * 1,5).toFixed(0);
+      this.adcosts.essaycost = Number(this.adcosts.essaycost*1.3).toFixed(0);
     }
   },
-  computed:{
-      moneyStatus(){
-          return this.$money
-      }
-  }
-,
+  computed: {
+    moneyStatus() {
+      return this.$money;
+    }
+  },
   data() {
     return {
-        money:this.$money
+      money: this.$money,
+      essay: this.$money,
+      autoCollect: null,
+      moneyPerSecond: 0,
+
+      adcosts: {
+        moneycost: 30,
+        essaycost: 64,
+        gainspeed: 5000,
+        gainamount: 1
+      }
     };
   },
   watch: {
-      '$money'(){
-          this.money=this.$money.moneybag
-      }
-
+    $money() {
+      this.money = this.$money.moneybag;
+      this.essay = this.$money.essays;
+    }
+  },
+  beforeDestroy() {
+    clearInterval(this.autoCollect);
   }
 };
 </script>
