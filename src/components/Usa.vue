@@ -110,8 +110,8 @@ export default {
       this.adcosts.moneycost = Number(this.adcosts.moneycost).toFixed(0);
       this.adcosts.essaycost = Number(this.adcosts.essaycost).toFixed(0);
       this.moneyPerSecond = Number(this.moneyPerSecond).toFixed(2);
-      this.adcosts.moneycost = Number(this.adcosts.moneycost * 1,5).toFixed(0);
-      this.adcosts.essaycost = Number(this.adcosts.essaycost*1.3).toFixed(0);
+      this.adcosts.moneycost = Number(this.adcosts.moneycost * 1,3).toFixed(0);
+      this.adcosts.essaycost = Number(this.adcosts.essaycost*1.25).toFixed(0);
     }
   },
   computed: {
