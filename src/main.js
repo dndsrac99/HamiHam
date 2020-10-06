@@ -3,7 +3,7 @@ import App from './App.vue'
 import vuetify from './plugins/vuetify';
 
 Vue.config.productionTip = false
-Vue.prototype.$money = Vue.observable({moneybag: 0,saidyes: false, essays: 0});
+Vue.prototype.$money = Vue.observable({moneybag: 0,saidyes: false, essays: 0, soldiers: 0});
 Vue.prototype.$eventBus = new Vue()
 // Vue.prototype.$getmoney = function()
 // {

@@ -6,9 +6,10 @@
       color="yellow accent-4"
       dark
     >
-    <v-toolbar-title class="blacktext"><v-icon size="30" color="black">mdi-star-circle</v-icon> HamiHam</v-toolbar-title>
+    <v-toolbar-title class="blacktext"><v-icon size="30" color="black" >mdi-star-circle</v-icon> HamiHam</v-toolbar-title>
+    
     <v-tabs color="black">
-      
+      <v-spacer></v-spacer>
       <v-tab @click="washingmachine = false, hamiham=true">Hamilton</v-tab>
       <v-tab @click="washingmachine = true, hamiham=false">Washington</v-tab>
     </v-tabs>
@@ -61,6 +62,14 @@ export default {
         this.$eventBus.$on('decreaseEssays',function(amount){
       console.log(`yes should go down ${this.$money.essays} essays`)
       this.$money.essays -= amount
+    }),
+        this.$eventBus.$on('increaseArmy',function(amount){
+      console.log(`yes ${this.$money.soldiers} soldiers w/ guns and ships`)
+      this.$money.soldiers += amount
+    }),
+        this.$eventBus.$on('decreaseArmy',function(amount){
+      console.log(`yes  ${this.$money.soldiers} soldiers yielded`)
+      this.$money.soldiers -= amount
     })
   },
   beforeDestroy(){
