@@ -21,6 +21,7 @@
       </v-container>
       <v-container v-if="washingmachine">
         <Washington/>
+        <Battle/>
       </v-container>
     </v-main>
   </v-app>
@@ -30,6 +31,7 @@
 import Mainpage from './components/Mainpage';
 import Usa from './components/Usa'
 import Washington from './components/Washington'
+import Battle from './components/Battle'
 
 export default {
   name: 'App',
@@ -38,7 +40,8 @@ export default {
     
     Mainpage,
     Usa,
-    Washington
+    Washington,
+    Battle
   },
   mounted()
   {
@@ -61,14 +64,32 @@ export default {
         this.$eventBus.$on('decreaseEssays',function(amount){
       console.log(`yes should go down ${this.$money.essays} essays`)
       this.$money.essays -= amount
-    })
+    }),
+        this.$eventBus.$on('increaseArmy',function(amount){
+      console.log(`yes ${this.$money.soldiers} essays`)
+      this.$money.soldiers += amount
+    }),
+        this.$eventBus.$on('decreaseArmy',function(amount){
+      console.log(`yes should go down ${this.$money.soldiers} soldiers`)
+      this.$money.soldiers -= amount
+    }),
+      this.$eventBus.$on('goingToWar',function(){
+        this.$battle.show = true;
+        console.log('show window')
+      }),
+      this.$eventBus.$on('goHomeAlexander',function(){
+        this.$battle.show = false;
+      })
+     
   },
   beforeDestroy(){
     this.$eventBus.$off('increaseMoney'),
     this.$eventBus.$off('increaseEssays'),
     this.$eventBus.$off('decreaseMoney'),
     this.$eventBus.$off('decreaseEssays'),
-    this.$eventBus.$off('sayYes')
+    this.$eventBus.$off('sayYes'),
+    this.$eventBus.$off('increaseArmy'),
+    this.$eventBus.$off('decreaseArmy')
   },
   data: () => ({
       constitution: false,
